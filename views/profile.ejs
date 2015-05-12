@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+    <title>Blogger</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-user"></span> Profile Page for <%= user.username %></h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <a href="/post" class="btn btn-default btn-sm">Create New Post</a>
+        <a href="/blog/<%= user.username %>" class="btn btn-default btn-sm">Blog</a>
+        <a href="/" class="btn btn-default btn-sm">Home</a>
+    </div>
+
+    <% if (typeof message !== 'undefined' && message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="well">
+            <h3><span class="fa fa-laptop"></span> Local</h3>
+
+                <p>
+                    <strong>id</strong>: <%= user.id %><br>
+                    <strong>email</strong>: <%= user.email %><br>
+                    <strong>username</strong>: <%= user.username %><br>
+                    <strong>password</strong>: <%= user.password %><br>
+                    <strong>Blog Title</strong>: <%= user.blogTitle %><br>
+                    <strong>Blog Description</strong>: <%= user.blogDescription %>
+                </p>
+                
+        </div>
+
+        <div class="well">
+            <h3><span class="fa fa-laptop"></span> Posts</h3>
+                <p>
+                    <% if (posts.length > 0) { %>
+                      <ul>
+                        <% posts.forEach(function(post){ %>
+                          <br>
+                          <strong>Title of the Post: </strong><%= post.title %>
+                          <strong>Created At: </strong><%= post.createdAt %>
+                          <strong>Updated At: </strong><%= post.updatedAt %>
+                          <a href="/post/<%= post._id %>" class="btn btn-default btn-sm">Edit Post</a>
+                          <a href="/delete/<%= post._id %>" class="btn btn-default btn-sm">Delete Post</a>
+                          <a href="/comment/<%= post._id %>" class="btn btn-default btn-sm">Comment Post</a>
+                          <br> 
+                        <% }) %>
+                      </ul>
+                    <% } %>
+                </p>
+        </div>
+
+        <div class="well">
+            <h3><span class="fa fa-laptop"></span> Comments For Posts From <%= user.username %></h3>
+                <p>
+                    <% if (comments.length > 0) { %>
+                      <ul>
+                        <% comments.forEach(function(comment){ %>
+                          <br>
+                          <strong>Comment From User: </strong><%= comment.username %>
+                          <strong>Comment Content: </strong><%= comment.content.slice(0,140) %>
+                          <strong>Comment Date: </strong><%= comment.createdAt %>
+                          <a href="/post/<%= comment.postId %>" class="btn btn-default btn-sm">Read Post</a>
+                          <br> 
+                        <% }) %>
+                      </ul>
+                    <% } %>
+                </p>
+        </div>
+        
+</div>
+</body>
+</html>
