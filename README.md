@@ -32,5 +32,5 @@ Time spent: `20 Hours`
 
 ### Walkthrough
 
-![Video Walkthrough](...)
+https://github.com/jxhangithub/Blogger/blob/master/blogger-demo.gif
 
